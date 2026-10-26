@@ -5,18 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 11:29:54 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/26 14:12:01 by pcanals          ###   ########.fr       */
+/*   Created: 2026/10/26 11:51:46 by qzimmerm          #+#    #+#             */
+/*   Updated: 2026/10/26 16:40:42 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "ft_paragraph.h"
+#include <unistd.h>
+#include <stdio.h>
 
-/*void ft_make_paragraph(char *input, t_config *config)
+void	ft_make_paragraph(char *input, t_config *config)
 {
-	
-}*/
+	int D = 0;
+	int	E = 0;
+	int	F = 0;
+
+	// "hello world"
+	while (D < config-> p_nbr && input[D] != '\0') /*paragraphe (3)*/
+	{
+		while (E < config-> p_len && input[D] != '\0') /*ligne par paragraphe (2)*/
+		{
+			while (F < config-> l_len && input[D] != '\0') /*caractere par ligne (5)*/ 
+			{
+				write(1, &input[F], 1);
+				F++;
+			}
+			E++;
+		}
+		write (1, "\n", 1);
+		D++;
+	}
+	if (input[D] != '\0')
+	{
+		write(1, "Reste :", 8);
+		while (input[D] != '\0')
+		{
+			write(1, &input[D], 1);
+			D++;
+		}
+	}
+}
+
+
+
 
 int	put_error(char *input)
 {
@@ -32,33 +63,20 @@ int	main(int ac, char **av)
 {
 	t_config	config;
 
-	config.p_nbr = 3;
-	config.p_len = 2;
 	config.l_len = 5;
+	config.p_len = 2;
+	config.p_nbr = 3;
 	if (ac != 2)
 		return (put_error("Error: usage ./a.out <text>.\n"));
+	/*if 
+		return (put_error("Not enough paragraphs.\n"));
+	{
+		if 
+			return (put_error("Missing line in paragraph.\n"));
+		if 
+			return (put_error("Missing char in line.\n"));
+	}*/
 	(void) **av;
+	ft_make_paragraph(av[1], &config);
+	return ( 1);
 }
-
-/*int l_len(char *str)
-{
-    int i;
-
-    i = 0;
-    while (str[i] != '\0')
-        i++;
-	if (i == 5)
-		write(1, '\n', 1);
-	else
-		return 0;
-	
-    return (str[i]);
-}
-
-#include <stdio.h>
-int main()
-{
-    char nbrchar[] = "testtest";
-    printf("%d", l_len(nbrchar));
-    return 0;
- }*/
