@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/26 11:51:46 by qzimmerm          #+#    #+#             */
-/*   Updated: 2026/10/26 16:40:42 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/27 10:06:08 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,30 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void	ft_make_paragraph(char *input, t_config *config)
-{
-	int D = 0;
-	int	E = 0;
-	int	F = 0;
 
-	// "hello world"
-	while (D < config-> p_nbr && input[D] != '\0') /*paragraphe (3)*/
-	{
-		while (E < config-> p_len && input[D] != '\0') /*ligne par paragraphe (2)*/
+void	ft_make_paragraph(char *input, t_config *config)
+{	
+	while (input[config->f] != '\0' && config->d < config->p_nbr) // debut fonction
+	{	
+		write(1, &input[config->f++], 1);
+		if (config->f % config-> l_len == 0)
 		{
-			while (F < config-> l_len && input[D] != '\0') /*caractere par ligne (5)*/ 
-			{
-				write(1, &input[F], 1);
-				F++;
-			}
-			E++;
-		}
-		write (1, "\n", 1);
-		D++;
-	}
-	if (input[D] != '\0')
-	{
-		write(1, "Reste :", 8);
-		while (input[D] != '\0')
+			write (1, "\n", 1);
+			config->e++;
+		}		
+		if (config->e == config->p_len)
 		{
-			write(1, &input[D], 1);
-			D++;
-		}
+			write(1, "\n", 1);
+			config->d++;
+			config->e = 0;
+		}		
+	}	
+	if (input[config->f] != '\0')
+	{
+		write(1, "Rest: ", 6);
+		while (input[config->f] != '\0')
+			write(1, &input[config->f++], 1);
+		write(1, "\n", 1);
 	}
 }
 
@@ -62,7 +57,9 @@ int	put_error(char *input)
 int	main(int ac, char **av)
 {
 	t_config	config;
-
+	config.d = 0;
+	config.e = 0;
+	config.f = 0;
 	config.l_len = 5;
 	config.p_len = 2;
 	config.p_nbr = 3;
@@ -76,7 +73,7 @@ int	main(int ac, char **av)
 		if 
 			return (put_error("Missing char in line.\n"));
 	}*/
-	(void) **av;
+	//(void) **av;
 	ft_make_paragraph(av[1], &config);
 	return ( 1);
 }
