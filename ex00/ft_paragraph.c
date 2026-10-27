@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/26 11:51:46 by qzimmerm          #+#    #+#             */
-/*   Updated: 2026/10/27 16:29:14 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/27 16:45:40 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@ void	ft_make_paragraph(char *input, t_config *config)
 	while (input[config->f] != '\0' && config->d < config->p_nbr)
 	{
 		write(1, &input[config->f++], 1);
-		if (input[config->f] == '\0' && config->f % config->l_len)
-		{
-			write (1, "\n", 1);
-			write(1, "Missing char in line.\n",22);
-		}
 		if (config->f % config-> l_len == 0)
 		{
 			write (1, "\n", 1);
@@ -34,6 +29,8 @@ void	ft_make_paragraph(char *input, t_config *config)
 			config->d++;
 			config->e = 0;
 		}
+		if (input[config->f] == '\0' && config->f % config->l_len)
+			write(1, "\nMissing char in line.\n",23);
 	}		
 	if (input[config->f] != '\0')
 	{
