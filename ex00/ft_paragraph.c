@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/26 11:51:46 by qzimmerm          #+#    #+#             */
-/*   Updated: 2026/10/27 10:06:08 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/27 10:15:08 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,23 @@
 #include <unistd.h>
 #include <stdio.h>
 
-
 void	ft_make_paragraph(char *input, t_config *config)
-{	
-	while (input[config->f] != '\0' && config->d < config->p_nbr) // debut fonction
-	{	
+{
+	while (input[config->f] != '\0' && config->d < config->p_nbr)
+	{
 		write(1, &input[config->f++], 1);
 		if (config->f % config-> l_len == 0)
 		{
 			write (1, "\n", 1);
 			config->e++;
-		}		
+		}
 		if (config->e == config->p_len)
 		{
 			write(1, "\n", 1);
 			config->d++;
 			config->e = 0;
-		}		
-	}	
+		}
+	}
 	if (input[config->f] != '\0')
 	{
 		write(1, "Rest: ", 6);
@@ -40,9 +39,6 @@ void	ft_make_paragraph(char *input, t_config *config)
 		write(1, "\n", 1);
 	}
 }
-
-
-
 
 int	put_error(char *input)
 {
@@ -57,6 +53,7 @@ int	put_error(char *input)
 int	main(int ac, char **av)
 {
 	t_config	config;
+
 	config.d = 0;
 	config.e = 0;
 	config.f = 0;
@@ -65,15 +62,6 @@ int	main(int ac, char **av)
 	config.p_nbr = 3;
 	if (ac != 2)
 		return (put_error("Error: usage ./a.out <text>.\n"));
-	/*if 
-		return (put_error("Not enough paragraphs.\n"));
-	{
-		if 
-			return (put_error("Missing line in paragraph.\n"));
-		if 
-			return (put_error("Missing char in line.\n"));
-	}*/
-	//(void) **av;
 	ft_make_paragraph(av[1], &config);
-	return ( 1);
+	return (1);
 }
