@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/28 08:35:30 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/28 11:47:16 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/28 16:18:48 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,59 @@
 #include "ft_calc.h"
 
 int checkup_num(char *str)
-{	
-	while (str[calc->val1] != '\0')
-	{
-		if (str[calc->val1] >= '0' && str[calc->val1] <='9' || str[calc->val1] >= '-' || str[calc->val1] >= '+')
-			calc->val1++;
-		else
-			return (1);
-	}
-	while (str[calc->val2] != '\0')
-	{
-		if (str[calc->val2] >= '0' && str[calc->val2] <='9' || str[calc->val2] >= '-' || str[calc->val2] >= '+')
-			calc->val2++;
-		else
-			return (1);
-	}
-}
-int checkup_signe(char *str)
 {
-	const char *charset = "+-*/==!=<>";
-	
-	if (str[i] == 2)
-	{
+	int i;
 
-		
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= '0' && str[i] <='9' || str[i] == '-' || str[i] == '+')
+			return (0);
+		i++;
 	}
+	return (0);
+}
+
+int ft_strlen(char *str, t_calc	*calc)
+{
+    while (str[calc->i] != '\0')
+        calc->i++;
+	return (1);
+}
+
+int put_error(char *input)
+{
+	while (*input != '\0')
+	{
+		write(2, input, 1);
+		input++;
+	}
+	return (1);
+}
+
+int checkup_signe(char *str, t_calc	*calc)
+{
+	const char *charset = "+-==!=<>";
 	
+	if (calc->i == 2)
+	{
+		if ((str[0] == '!' || str[0] == '=') && (str[1] == '='))
+			return (0);
+		else
+			return (1);
+	}
+	else if (calc->i == 1)
+	{
+		while (charset[calc->j] != '\0')
+		{
+			if (str[0] == charset[calc->j])
+				return (0);
+			calc->j++;
+		}
+		return (1);
+	}
+	else
+		return(put_error(ERRORD));
 }
 
 int ft_atoi(char *str)
@@ -85,24 +112,32 @@ int ft_calc(int num1, int op, int num2)
 			return(num1 < num2);
 		else if (op == '>')
 			return(num1 > num2);
+		return (0);
 }
 
 int main(int ac, char **av)
 {
 	t_calc	calc;
 
-	calc.val1 = 0;
-	calc.val2 = 0;
-	calc.result = 0;
+	calc.val1 = ft_atoi(av[1]);
+	calc.val2 = ft_atoi(av[3]);
+	calc.op = ft_atoi(av[2]);
 	calc.i = 0;
 	calc.j = 0;
 	
-	if (ac != 0)
-		write(1, "Error: usage ./a.out <int> <sign> <int>.'\n'", 41);
-	ft_calc(av[1], av[2], av[3]);
+	ft_strlen(av[2], &calc);
+	checkup_signe(av[2], &calc);
+	if (ac != 4)
+		return(put_error(ERRORU));
+	if (checkup_num(av[1]))
+		return(put_error(ERROR1N));
+	if (checkup_num(av[3]))
+		return(put_error(ERROR3N));
+	if (av[2][0] == '/' && calc.val2 == 0)
+		return(put_error(ERRORS));
+	ft_calc(calc.val1, calc.op, calc.val2);
 	return (0);
 }
-
 
 	// switch (op)
 	// {

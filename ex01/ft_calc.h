@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/28 09:03:40 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/28 11:23:40 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/28 14:07:39 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ typedef struct s_calc
 {
 	int val1;
 	int val2;
-	int result;
+	int op;
 	int i;
 	int j;
 }	t_calc;
@@ -26,5 +26,6 @@ typedef struct s_calc
 #define ERRORS "Error: arg 2 must be a sign (+ - * / == != < >).\n"
 #define ERROR3N "Error: arg 3 must be a number.\n"
 #define ERRORD "Error: division by zero.\n"
+#define ERRORU "Error: usage ./a.out <int> <sign> <int>.'\n"
 
 #endif
