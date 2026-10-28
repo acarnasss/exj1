@@ -6,12 +6,13 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/28 08:35:30 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/28 16:18:48 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/28 16:34:14 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ft_calc.h"
+#include <stdio.h>
 
 int checkup_num(char *str)
 {
@@ -20,8 +21,8 @@ int checkup_num(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] >= '0' && str[i] <='9' || str[i] == '-' || str[i] == '+')
-			return (0);
+		if (!(str[i] >= '0' && str[i] <='9' || str[i] == '-' || str[i] == '+'))
+			return (1);
 		i++;
 	}
 	return (0);
@@ -29,9 +30,10 @@ int checkup_num(char *str)
 
 int ft_strlen(char *str, t_calc	*calc)
 {
+	calc->i = 0;
     while (str[calc->i] != '\0')
         calc->i++;
-	return (1);
+	return (calc->i);
 }
 
 int put_error(char *input)
@@ -54,6 +56,7 @@ int checkup_signe(char *str, t_calc	*calc)
 			return (0);
 		else
 			return (1);
+		calc->j++;
 	}
 	else if (calc->i == 1)
 	{
@@ -94,25 +97,24 @@ int ft_atoi(char *str)
     return (result * signe);
 }
 
-int ft_calc(int num1, int op, int num2)
+void	ft_calc(t_calc *calc, char *av)
 {
-		if (op == '+')
-			return(num1 + num2);
-		else if (op == '-')
-			return(num1 - num2);
-		else if (op == '*')
-			return(num1 * num2);
-		else if (op == '/')
-			return(num1 / num2);
-		else if (op == '=')
-			return(num1 == num2);
-		else if (op == '!')
-			return(num1 != num2);
-		else if (op == '<')
-			return(num1 < num2);
-		else if (op == '>')
-			return(num1 > num2);
-		return (0);
+	if (av[0] == '+')
+		calc->op = calc->val1 + calc->val2;
+	else if (av[0] == '-')
+		calc->op = calc->val1 - calc->val2;
+	else if (av[0] == '*')
+		calc->op = calc->val1 * calc->val2;
+	else if (av[0] == '/')
+		calc->op = calc->val1 / calc->val2;
+	else if (av[0] == '=' && av[1] == '=')
+		calc->op = calc->val1 == calc->val2;
+	else if (av[0] == '!' && av[1] == '=')
+		calc->op = calc->val1 != calc->val2;
+	else if (av[0] == '<')
+		calc->op = calc->val1 < calc->val2;
+	else if (av[0] == '>')
+		calc->op = calc->val1 > calc->val2;
 }
 
 int main(int ac, char **av)
@@ -121,8 +123,6 @@ int main(int ac, char **av)
 
 	calc.val1 = ft_atoi(av[1]);
 	calc.val2 = ft_atoi(av[3]);
-	calc.op = ft_atoi(av[2]);
-	calc.i = 0;
 	calc.j = 0;
 	
 	ft_strlen(av[2], &calc);
@@ -135,7 +135,8 @@ int main(int ac, char **av)
 		return(put_error(ERROR3N));
 	if (av[2][0] == '/' && calc.val2 == 0)
 		return(put_error(ERRORS));
-	ft_calc(calc.val1, calc.op, calc.val2);
+	ft_calc(&calc, av[2]);
+	printf("%d\n", calc.op);
 	return (0);
 }
 
