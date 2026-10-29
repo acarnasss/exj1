@@ -6,13 +6,14 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/29 11:01:23 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/29 11:14:21 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/29 14:04:07 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "bazinga.h"
+#include <stdio.h>
 
 int checkup_num(char *str)
 {
@@ -28,12 +29,14 @@ int checkup_num(char *str)
 	return (0);
 }
 
-int ft_strlen(char *str, t_config	*config)
+int ft_strlen(char *str)
 {
-	config->i = 0;
-    while (str[config->i] != '\0')
-        config->i++;
-	return (config->i);
+	int i;
+	
+	i = 0;
+    while (str[i] != '\0')
+        i++;
+	return (i);
 }
 
 int put_error(char *input)
@@ -71,14 +74,38 @@ int ft_atoi(char *str)
     return (result * signe);
 }
 
-void    printlgrid(t_config	*config)
+int    printltab(t_config	*config)
 {
-	int *grid;
+	char *tab;
+	int i;
+	int len;
+	int op;
+	int y;
 
-	grid = malloc(config->width * config->height * sizeof(int)); // largeur * hauteur
-	
-	free(grid);
-
+	i = 0;
+	tab = malloc(config->width * config->height * sizeof(char)); // largeur * hauteur
+	while (i < config->width * config->height)
+	{
+		tab[i++] = FILLER;
+	}
+	len = ft_strlen(BAZINGA);
+	// op = tab[(config->height / 2) + (config->height - config->width) / 2];
+	// while (i < len)
+	// {
+	// 	tab[op + i] = ft_strlen(BAZINGA);
+	// 	i++;
+	// }
+	y = 0;
+	while (y < config->height)
+	{
+		write(1, &tab[config->height], config->width);
+		write(1, "\n", 1);
+		y++;
+	}
+	free(tab);
+	if(tab == NULL)
+		return(put_error(ERRORMALLOC));
+	return (0);
 }
 
 int main(int ac, char **av)
@@ -89,15 +116,13 @@ int main(int ac, char **av)
 	// config.comptheiht = 0;
 	// config.comptwight = 0;
 	// config.len = config.width + 2;
-	ft_strlen(av[1], &config);
+	ft_strlen(av[1]);
 	if(ac != 3)
 		return(put_error(ERRORUSAGE));
 	if(checkup_num(av[2]))
 		return(put_error(ERRORWIDTH));
 	if(checkup_num(av[1]))
 		return(put_error(ERRORHEIGHT));
-	if(&malloc == NULL)
-		return(put_error(ERRORMALLOC));
-	printlgrid(&config);
+	printltab(&config);
 	return (0);
 }
