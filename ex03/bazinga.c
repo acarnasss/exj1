@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bazinga.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/29 11:01:23 by pcanals           #+#    #+#             */
+/*   Updated: 2026/10/29 11:14:21 by pcanals          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include "bazinga.h"
@@ -16,12 +28,12 @@ int checkup_num(char *str)
 	return (0);
 }
 
-int ft_strlen(char *str, t_calc	*calc)
+int ft_strlen(char *str, t_config	*config)
 {
-	calc->i = 0;
-    while (str[calc->i] != '\0')
-        calc->i++;
-	return (calc->i);
+	config->i = 0;
+    while (str[config->i] != '\0')
+        config->i++;
+	return (config->i);
 }
 
 int put_error(char *input)
@@ -59,30 +71,33 @@ int ft_atoi(char *str)
     return (result * signe);
 }
 
-int    printlgrid(t_config config)
+void    printlgrid(t_config	*config)
 {
 	int *grid;
 
-	grid = malloc(config->width * config->height * sizeof(int)); // largeur x nombre de hauteur
-
+	grid = malloc(config->width * config->height * sizeof(int)); // largeur * hauteur
+	
 	free(grid);
+
 }
 
 int main(int ac, char **av)
 {
 	t_config	config;
-	config.height = av[1]; // hauteur
-	config.width = av[2]; // largeur
+	config.height = ft_atoi(av[1]); // hauteur
+	config.width = ft_atoi(av[2]); // largeur
 	// config.comptheiht = 0;
 	// config.comptwight = 0;
 	// config.len = config.width + 2;
+	ft_strlen(av[1], &config);
 	if(ac != 3)
-		write(put_error(ERRORUSAGE));
+		return(put_error(ERRORUSAGE));
 	if(checkup_num(av[2]))
-		write(put_error(ERRORWIDTH));
+		return(put_error(ERRORWIDTH));
 	if(checkup_num(av[1]))
-		write(put_error(ERRORHEIGHT));
-	if(malloc == NULL)
-		write(put_error(ERRORMALLOC));
-	printline(&config)
+		return(put_error(ERRORHEIGHT));
+	if(&malloc == NULL)
+		return(put_error(ERRORMALLOC));
+	printlgrid(&config);
+	return (0);
 }
