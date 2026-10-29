@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/29 11:01:23 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/29 15:07:52 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/29 15:13:06 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ int main(int ac, char **av)
 	ft_strlen(av[1]);
 	if(ac != 3)
 		return(put_error(ERRORUSAGE));
-	if(checkup_num(av[2]))
-		return(put_error(ERRORWIDTH));
 	if(checkup_num(av[1]))
+		return(put_error(ERRORWIDTH));
+	if(checkup_num(av[2]))
 		return(put_error(ERRORHEIGHT));
 	if (config.width < config.len + 2)
 		config.width = config.len + 2;
