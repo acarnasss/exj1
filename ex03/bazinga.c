@@ -6,48 +6,22 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/29 11:01:23 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/29 14:26:32 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/29 14:33:29 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "bazinga.h"
-#include <stdio.h>
 
-int checkup_num(char *str)
-{
-	int i;
+int checkup_num(char *str);
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (!(str[i] >= '0' && str[i] <='9'))
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
-int ft_strlen(char *str)
-{
-	int i;
-	
-	i = 0;
-    while (str[i] != '\0')
-        i++;
-	return (i);
-}
+int ft_strlen(char *str);
 
-int put_error(char *input)
-{
-	while (*input != '\0')
-	{
-		write(2, input, 1);
-		input++;
-	}
-	return (1);
-}
+
+int put_error(char *input);
+
 
 int ft_atoi(char *str);
 
