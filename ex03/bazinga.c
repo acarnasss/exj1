@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/29 11:01:23 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/29 14:04:07 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/29 14:26:32 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,8 @@ int put_error(char *input)
 	return (1);
 }
 
-int ft_atoi(char *str)
-{
-    int result;
-    int i;
-    int signe;
+int ft_atoi(char *str);
 
-    result = 0;
-    i = 0;
-    signe = 1;
-    while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-        i++;
-    while (str[i] == '+' || str[i] == '-')
-    {
-        if (str[i] == '-')
-            signe = -signe;
-        i++;
-    }
-    while (str[i] >= '0' && str[i] <= '9')
-    {
-        result = result * 10 + (str[i] - '0');
-        i++;
-    }
-    return (result * signe);
-}
 
 int    printltab(t_config	*config)
 {
@@ -89,16 +67,16 @@ int    printltab(t_config	*config)
 		tab[i++] = FILLER;
 	}
 	len = ft_strlen(BAZINGA);
-	// op = tab[(config->height / 2) + (config->height - config->width) / 2];
-	// while (i < len)
-	// {
-	// 	tab[op + i] = ft_strlen(BAZINGA);
-	// 	i++;
-	// }
-	y = 0;
-	while (y < config->height)
+
+	while (i < len)
 	{
-		write(1, &tab[config->height], config->width);
+		tab[op + i] = BAZINGA[i];
+		i++;
+	}
+	y = 0;
+	while (y < config->width)
+	{
+		write(1, &tab[config->width], config->height);
 		write(1, "\n", 1);
 		y++;
 	}
@@ -113,9 +91,7 @@ int main(int ac, char **av)
 	t_config	config;
 	config.height = ft_atoi(av[1]); // hauteur
 	config.width = ft_atoi(av[2]); // largeur
-	// config.comptheiht = 0;
-	// config.comptwight = 0;
-	// config.len = config.width + 2;
+	
 	ft_strlen(av[1]);
 	if(ac != 3)
 		return(put_error(ERRORUSAGE));
@@ -123,6 +99,6 @@ int main(int ac, char **av)
 		return(put_error(ERRORWIDTH));
 	if(checkup_num(av[1]))
 		return(put_error(ERRORHEIGHT));
-	printltab(&config);
+	return(printltab(&config));
 	return (0);
 }

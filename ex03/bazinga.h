@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/29 11:01:31 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/29 11:01:33 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/29 14:05:28 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ typedef struct s_config
 	int height;
 	int width;
 	int i;
-	// int len;
-	// int comptheiht;
-	// int comptwight;
+
 }	t_config;
 
 # define BAZINGA	"BAZINGA"
