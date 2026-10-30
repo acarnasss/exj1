@@ -6,22 +6,22 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/29 11:01:31 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/30 11:17:41 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/30 11:33:07 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef BAZINGA_H
+#ifndef BAZINGA_H
 # define BAZINGA_H
-#include "ft_atoi.h"
+# include "ft_atoi.h"
 
 typedef struct s_config
 {
-	int height;
-	int width;
-	int i;
-	int len;
-	int op;
-	int y;
+	int	height;
+	int	width;
+	int	i;
+	int	len;
+	int	op;
+	int	y;
 
 }	t_config;
 
@@ -33,4 +33,4 @@ typedef struct s_config
 # define ERRORHEIGHT "Error: height must contain only digits.\n"
 # define ERRORMALLOC "Error: malloc failed.\n"
 
-# endif
+#endif
