@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 12:38:58 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/30 12:54:43 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/30 12:57:20 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int main(int ac, char **av)
 	
 	if (ac != 2)
 		return (put_error(ERRORUSAGE));
-	if ()
+	if (ft_check_num(av[1]))
 		return (put_error(ERRORDIGITS));
 	if ()
 		return (put_error(ERRORARG));
