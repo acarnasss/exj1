@@ -6,12 +6,13 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/28 09:03:40 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/28 14:07:39 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/30 11:53:54 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CALC_H
 # define FT_CALC_H
+# include "ft_atoi.h"
 
 typedef struct s_calc
 {
