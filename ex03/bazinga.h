@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/29 11:01:31 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/29 14:44:42 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/30 11:09:51 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ typedef struct s_config
 	int width;
 	int i;
 	int len;
+	int op;
+	int y;
 
 }	t_config;
 

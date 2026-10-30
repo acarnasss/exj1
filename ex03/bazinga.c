@@ -6,7 +6,7 @@
 /*   By: pcanals <pcanals@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/29 11:01:23 by pcanals           #+#    #+#             */
-/*   Updated: 2026/10/30 01:07:26 by pcanals          ###   ########.fr       */
+/*   Updated: 2026/10/30 11:12:43 by pcanals          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,29 +80,24 @@ int    printltab(t_config	*config)
 {
 	char *tab;
 	int i;
-	int op;
-	int y;
 
 	i = 0;
 	tab = malloc(config->width * config->height * sizeof(char)); // largeur * hauteur
 	while (i < config->width * config->height)
-	{
 		tab[i++] = FILLER;
-	}
 	config->len = ft_strlen(BAZINGA);
-	op = (config->height / 2) * config->width + (config->width - config->len) / 2;
+	config->op = (config->height / 2) * config->width + (config->width - config->len) / 2;
 	i = 0;
 	while (i < config->len)
 	{
-		tab[op + i] = BAZINGA[i];
+		tab[config->op + i] = BAZINGA[i];
 		i++;
 	}
-	y = 0;
-	while (y < config->height)
+	while (config->y < config->height)
 	{
-		write(1, &tab[y * config->width], config->width); // y = nbr de ligne
+		write(1, &tab[config->y * config->width], config->width); // y = nbr de ligne
 		write(1, "\n", 1);
-		y++;
+		config->y++;
 	}
 	if(tab == NULL)
 		return(put_error(ERRORMALLOC));
@@ -116,6 +111,7 @@ int main(int ac, char **av)
 	config.height = ft_atoi(av[2]); // hauteur
 	config.width = ft_atoi(av[1]); // largeur
 	config.len = ft_strlen(BAZINGA);
+	config.y = 0;
 	
 	ft_strlen(av[1]);
 	if(ac != 3)
